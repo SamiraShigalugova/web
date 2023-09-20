@@ -42,12 +42,31 @@ header{
     text-decoration: none;
     color: black;
   }
-  .spisok{
-    width:50%; 
-  }
-  .container div {
+  .container body {
     float:left;
     max-width: 960px;
+  }
+  .container body{
+    width: 100%;
+    text-align: center;
+  }
+  .main{
+    text-align: center;
+  }
+  .container body{
+    display: inline-block;
+  }
+  ul{
+    text-align: center;
+    list-style-position: inside;
+  }
+  ol{
+    text-align: center;
+    list-style-position: inside;
+  }
+  .container body ul{
+    display: inline-block;
+    text-align: left;
   }
   table {
     border: 1px solid grey;
