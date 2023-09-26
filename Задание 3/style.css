@@ -1,0 +1,195 @@
+@media screen and (min-width:360px)
+{
+  .logo1{
+    display: flex;
+    justify-content: flex-start;
+  }
+  .title{
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    text-decoration: none;
+    font-size: 36px;
+    padding: 5px;
+    margin-top: -50px;
+  }
+  .shapka{
+    display: flex;
+    justify-content: flex-start;
+  }
+  .shapka ul {
+    list-style: none;
+  }
+  .shapka li {
+    display: block;
+    margin-left: -40px; 
+  }
+  .shapka a{
+    text-decoration: none;
+    color: black;
+  }
+  .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  ul{
+    list-style-position: inside;
+  }
+  ol{
+    list-style-position: inside;
+  }
+  /*table
+  {
+    flex: 1;
+    order: -1;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td {
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex: 1;
+  }
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex: 1;
+  }
+  tbody tr:nth-child(odd)
+  {
+      background: #D8BFD8;
+  }
+  tbody tr:nth-child(even)
+  {
+      background: #E6E6FA;
+  }*/
+  table {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    width: 100%;
+    order:1;
+  }
+  td {
+    border: 1px solid grey;
+  }
+  tbody tr:nth-child(odd)
+  {
+      background: #D8BFD8;
+  }
+  tbody tr:nth-child(even)
+  {
+      background: #E6E6FA;
+  }
+  footer{
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding: 20px;
+    margin: -10px;
+    background-color: #D8BFD8;
+    color: #000;
+  }  
+
+}
+@media  screen and (min-width:768px) {
+  header
+  {
+    width: 100%;
+  }
+  .logo1{
+    display: flex;
+    justify-content: flex-start;
+    order: 1;
+  }
+  .title{
+    display: flex;
+    justify-content: flex-start;
+    order: 2;
+    color: black;
+    text-decoration: none;
+    font-size: 36px;
+    padding: 5px;
+    margin-left: 50px;
+  }
+  .shapka{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -40px;
+  }
+  .shapka ul {
+    list-style: none;
+  }
+  .shapka li {
+    display: inline;
+    margin-left: 5px; 
+  }
+  .shapka a{
+    text-decoration: none;
+    color: black;
+  }
+  .main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  ul{
+    list-style-position: inside;
+  }
+  ol{
+    list-style-position: inside;
+  }
+/*table {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+  }
+  td {
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  tbody tr:nth-child(odd)
+  {
+      background: #D8BFD8;
+  }
+  tbody tr:nth-child(even)
+  {
+      background: #E6E6FA;
+  }*/
+  table {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    width: 100%;
+    order:1;
+  }
+  td {
+    border: 1px solid grey;
+  }
+  tbody tr:nth-child(odd)
+  {
+      background: #D8BFD8;
+  }
+  tbody tr:nth-child(even)
+  {
+      background: #E6E6FA;
+  }
+  footer{
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    margin: -10px;
+    background-color: #D8BFD8;
+    color: #000;
+  } 
+}
