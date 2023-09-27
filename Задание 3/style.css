@@ -110,6 +110,7 @@
     justify-content: center;
     text-align: center;
     padding-bottom: 30px;
+    width: 960px;
   }
   .conteiner
   {
@@ -121,6 +122,26 @@
   ol{
     list-style-position: inside;
   }
+/*table {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+  }
+  td {
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  tbody tr:nth-child(odd)
+  {
+      background: #D8BFD8;
+  }
+  tbody tr:nth-child(even)
+  {
+      background: #E6E6FA;
+  }*/
   table {
     border: 1px solid grey;
     border-collapse: collapse;
