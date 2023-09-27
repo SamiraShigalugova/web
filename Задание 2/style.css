@@ -26,10 +26,12 @@ header{
     color: black;
   }
   .container{
-    padding: 50px;
+    padding-bottom: 50px;
+    padding-top: 50px;
   }
   .main{
-    text-align: center;
+    /*text-align: center;*/
+    padding: 30px;
   }
   ul{
     text-align: center;
@@ -41,6 +43,7 @@ header{
   }
   .container
   {
+    /*text-align: center;*/
     width: 960px;
 
   }
@@ -52,7 +55,7 @@ header{
     border: 1px solid grey;
     border-collapse: collapse;
     width: 960px;
-    margin-left: 60px;
+    /*margin-left: 60px;*/
  }
  td {
     border: 1px solid grey;
