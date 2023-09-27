@@ -31,9 +31,6 @@ header{
   .main{
     text-align: center;
   }
-  .container body{
-    display: inline-block;
-  }
   ul{
     text-align: center;
     list-style-position: inside;
@@ -45,10 +42,12 @@ header{
   .container
   {
     width: 960px;
+    margin-left: 50px;
   }
   .container body ul{
     display: inline-block;
-    text-align: left;
+   margin-left:100px ;
+   width: 960px;
   }
   table {
     border: 1px solid grey;
@@ -58,7 +57,6 @@ header{
  }
  td {
     border: 1px solid grey;
-    width: 960px;
 
  }
 tbody tr:nth-child(odd)
