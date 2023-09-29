@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-      <a href="#" class="logo1"> <img src="image0.png" width="50" height="50" alt="logo"></a>
+ <header>
+      <a href="#" class="logo"> <img src="image0.png" width="50" height="50" alt="logo"></a>
       <a href="#" class="title">Мой сайт</a>
       <nav class="shapka">
         <ul>
@@ -20,14 +20,12 @@
         </ul>
       </nav>
   </header>
-    <center>
   <div class="main">
-    <div class="container">
-      <nav class="spisok">
-        <ul> 
+    <nav class="spisok">
+      <ul> 
           <li><a href="http://kubsu.ru/">Абсолютная гипрессылка на главную страницу сайта KUBSU</a></li> 
           <li><a href="https://kubsu.ru/">Абсолютная гиперссылка на главную страницу сайта KUBSU в протоколе https</a></li> 
-          <li><a href="https://www.kubsu.ru./"><img src="image.jpg" alt="Цветок" width="300" height="200"  title="Ссылка-изображение"></a></li>
+          <li><a href="https://www.kubsu.ru./"><img src="image.jpg" alt="Цветок" width="200" height="150"  title="Ссылка-изображение"></a></li>
           <li><a href="/page2.html"> Сокращенная ссылка на внутреннюю страницу</a></li>
           <li><a href="/index.html"> Сокращенная ссылка на главную страницу</a></li>
           <li><a href="#a1">Ссылка на фрагмент текущей страницы</a></li>
@@ -37,7 +35,7 @@
           <li><a href="./about/about.html"> Относительная ссылка на страницу в каталоге about</a></li>
           <li><a href="./11/new11.html">Ссылка на страницу уровнем выше (здесь ссылка на страницу ниже текущей, на следующей будет ссылка на страницу выше текущей)</a></li>
           <li><a href="./12/12.2/new12.html">Ссылка на страницу двумя уровнями выше(аналогично первой)</a></li>
-          <li>КУБГУ - это высшее учебное заведение в <a href="https://yandex.ru/search/?text=Краснодар">Краснодаре</a><br>Является одним из крупнейших и старейших университетов юга России.</li>
+          <li>КУБГУ - это высшее учебное заведение в <a href="https://yandex.ru/search/?text=Краснодар">Краснодаре</a></li>
           <li><a href="https://ru.wikipedia.org/wiki/Краснодар#Этимология">Ссылка на фрагмент на другом сайте</a></li>
           <li>Ссылка в прямоугольной и круглой области<br />
             <img src="image2.jpg" alt="Фото для задания" width="200" height="100" usemap="#link">
@@ -58,7 +56,6 @@
           <li><a href="https://minzdrav.gov.ru/" title="Минздрав">Сайт Министерства здравоохранения</a></li>
         </ol>
       </nav>
-      <div class="table">
       <table>
         <caption id="a2">Таблица</caption>
         <thead>
@@ -106,7 +103,7 @@
         </tr>
       </tbody>
       </table>
-    </div>
+      <div class="forma">
       <h2 id="a1">Форма:</h2>
       <form action="/" method="POST">
       <label>
@@ -133,7 +130,7 @@
           <input name=sex type="radio" value="female" checked="checked">
           Женский</label> <br />
       <label>
-        Любимый язык программирования: <br>
+      Любимый язык программирования: <br>
         <select name="PL[]" multiple="multiple">
             <option value="Pascal">Pascal</option>
             <option value="C">C</option>
@@ -154,11 +151,9 @@
       <label> С контрактом ознакомлен(а):<input type="checkbox" name="check"></label><br />
       <input type="submit" value="Сохранить">
       </form>
+    </div>
   </div>
-  </div>
-    </center>
-    <footer>
-      2023 Шигалугова Самира 27/2
-    </footer>
-    </body>
-    </html>
+  <footer>
+    2023 Шигалугова Самира 27/2
+  </footer>
+  </body>
