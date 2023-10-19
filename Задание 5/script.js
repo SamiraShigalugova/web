@@ -7,7 +7,10 @@ function calc() {
         let result = document.getElementById("result");
         let price = 0;
         price += parseInt(type_tovara.options[type_tovara.selectedIndex].value);
+        if(count.value>0)
         price = parseInt(count.value) * price;
+else
+alert("Количество не подходит");
         result.innerHTML = price;
 }
 function sbros()
