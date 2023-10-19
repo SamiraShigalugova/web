@@ -23,7 +23,7 @@
                     <div><b>Стоимость: <span id="result"></span> руб</b></div>
                         <div class="form-group">
                             <label>Товары</label>
-                              <select onchange="calc()" id="tovar" class="form-control">
+                              <select id="tovar" class="form-control">
                                 <option selected>Выбрать</option>
                                 <option value="120">Молоко</option>
                                 <option value="150">Кефир</option>
@@ -34,8 +34,8 @@
                         <label>Количество товаров</label>
                         <input type="number" class="form-control" id="count" value="1">
                         <div class="d-grid gap-2 d-md-block mt-3">
-                          <button class="btn btn-primary btn-sm btn-block" type="button" onclick="calc();" id="button">Рассчитать стоимость</button>
-                          <button class="btn btn-secondary btn-sm btn-block" type="reset" onclick="sbros()">Сбросить</button>
+                          <button class="btn btn-primary btn-sm btn-block" type="button"  id="button">Рассчитать стоимость</button>
+                          <button class="btn btn-secondary btn-sm btn-block" type="reset" id="button2">Сбросить</button>
                         </div>
                 </div>
                 </div>
