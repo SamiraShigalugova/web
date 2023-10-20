@@ -1,22 +1,12 @@
-const kolvo = document.getElementById('quantity');
-const radios = document.getElementsByName('serviceType');
+window.addEventListener("DOMContentLoaded",function (event){
+let kolvo = document.getElementById('quantity');
+let radios = document.getElementsByName('serviceType');
 const options = document.getElementById('options');
-const optionSelect = document.getElementById('option');
-const sv = document.getElementById('svoistvo');
-const svCheckbox = document.getElementById('property');
-const priceText = document.getElementById('price');
-
-// Обработчик изменения количества
-kolvo.addEventListener('change', calculatePrice);
-// Обработчик изменения опции товара
-optionSelect.addEventListener('change', calculatePrice);
-// Обработчик изменения свойства товара
-svCheckbox.addEventListener('change', calculatePrice);
-// Обработчик изменения типа услуги
-for (const radio of radios) {
-  radio.addEventListener('change', updateForm);
-}
-
+let optionSelect = document.getElementById('option');
+let sv = document.getElementById('svoistvo');
+let svCheckbox = document.getElementById('property');
+let sb=document.getElementById("button2");
+let calc=document.getElementById("button");
 // Функция для пересчета цены товара
 function calculatePrice() 
 {
@@ -43,18 +33,23 @@ function calculatePrice()
   // Добавление стоимости опции товара, если выбрана
   if (optionSelect.style.display !== 'none') {
     if(optionSelect.value === 'option1')
-    basePrice += 50;
+    basePrice += 5000;
     if(optionSelect.value === 'option2')
-    basePrice += 100;
+    basePrice += 1000;
     if(optionSelect.value === 'option3')
-    basePrice += 200;
+    basePrice += 2000;
   }
   // Добавление стоимости свойства товара, если выбрано
   if (svCheckbox.style.display !== 'none' && svCheckbox.checked) {
-    basePrice += 20;
+    basePrice += 200;
   }
-  const totalPrice = basePrice * quantity;
-  priceText.textContent = 'Цена: ' + totalPrice + ' руб.';
+  let result=document.getElementById("price");
+  if(quantity>0)
+  {
+    totalPrice = basePrice * quantity;
+    result.innerHTML=totalPrice;
+  }
+  else alert("Неверное количество");
 }
 // Функция для обновления формы в зависимости от выбранного типа услуги
 function updateForm() {
@@ -72,3 +67,20 @@ function updateForm() {
   }
   calculatePrice();
 }
+function sbros()
+{
+        let result1 = document.getElementById("price");
+        let price=0;
+        result1.innerHTML=price;
+        options.style.display = 'none';
+        sv.style.display = 'none';
+}
+// Обработчик изменения типа услуги
+for (const radio of radios) {
+  radio.addEventListener("change", updateForm);
+}
+//Обработчик сброса
+sb.addEventListener("click",sbros);
+//Обработчик изменения цены
+calc.addEventListener("click",calculatePrice);
+});
