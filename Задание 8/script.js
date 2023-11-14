@@ -1,77 +1,125 @@
-// При открытии страницы восстанавливаем значения полей формы из LocalStorage, если они есть
-document.addEventListener('DOMContentLoaded', function() {
-    var fullNameInput = document.getElementById('fullName');
-    var emailInput = document.getElementById('email');
-    var phoneInput = document.getElementById('phone');
-    var organizationInput = document.getElementById('organization');
-    var messageInput = document.getElementById('message');
+// Функция для открытия попапа
+function openPopup() {
+    var popup = document.getElementById('popup');
+    popup.style.display = 'flex';
     
-    fullNameInput.value = localStorage.getItem('fullName');
-    emailInput.value = localStorage.getItem('email');
-    phoneInput.value = localStorage.getItem('phone');
-    organizationInput.value = localStorage.getItem('organization');
-    messageInput.value = localStorage.getItem('message');
+    // Меняем URL страницы с помощью History API
+    history.pushState(null, null, '#popup');
+  }
+  
+  // Функция для закрытия попапа
+  function closePopup() {
+    var popup = document.getElementById('popup');
+    popup.style.display = 'none';
+    
+    // Меняем URL страницы с помощью History API
+    history.pushState(null, null, '/');
+  }
+  
+  // Обработчик клика по кнопке открытия формы
+  document.getElementById('openPopupButton').addEventListener('click', function() {
+    openPopup();
   });
   
-  // При отправке формы сохраняем значения полей в LocalStorage
+  // Обработчик нажатия кнопки "Назад" в браузере
+  window.addEventListener('popstate', function(event) {
+    closePopup();
+  });
+  
+  // Обработчик отправки формы
   document.getElementById('feedbackForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
-    var fullNameInput = document.getElementById('fullName');
-    var emailInput = document.getElementById('email');
-    var phoneInput = document.getElementById('phone');
-    var organizationInput = document.getElementById('organization');
-    var messageInput = document.getElementById('message');
+    var fullName = document.getElementById('fullName').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var organization = document.getElementById('organization').value;
+    var message = document.getElementById('message').value;
     
-    localStorage.setItem('fullName', fullNameInput.value);
-    localStorage.setItem('email', emailInput.value);
-    localStorage.setItem('phone', phoneInput.value);
-    localStorage.setItem('organization', organizationInput.value);
-    localStorage.setItem('message', messageInput.value);
-    
-    // Отправка данных формы с помощью AJAX
-    var formData = new FormData(document.getElementById('feedbackForm'));
-    
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://formcarry.com/s/JaNllP6cta', true);
-    xhr.setRequestHeader('Accept', 'application/json');
-    
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          document.getElementById('result').textContent = 'Форма успешно отправлена!';
-          fullNameInput.value = '';
-          emailInput.value = '';
-          phoneInput.value = '';
-          organizationInput.value = '';
-          messageInput.value = '';
-          localStorage.clear();
-        } else {
-          document.getElementById('result').textContent = 'Ошибка при отправке формы.';
-        }
+    // Отправка данных на сервер с помощью fetch
+    fetch('https://formcarry.com/s/JaNllP6cta', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        organization: organization,
+        message: message
+      })
+    })
+    .then(function(response) {
+      if (response.ok) {
+        // Если данные успешно отправлены
+        document.getElementById('messageBox').textContent = 'Сообщение успешно отправлено';
+        document.getElementById('messageBox').className = 'message-box success';
+        
+        // Очистка данных формы
+        document.getElementById('fullName').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('organization').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        // Если произошла ошибка при отправке данных
+        document.getElementById('messageBox').textContent = 'Произошла ошибка';
+        document.getElementById('messageBox').className = 'message-box error';
       }
-    };
+    })
+    .catch(function(error) {
+      console.log(error);
+      
+      // Если произошла ошибка при отправке данных
+      document.getElementById('messageBox').textContent = 'Произошла ошибка';
+      document.getElementById('messageBox').className = 'message-box error';
+    });
+  });
+  
+  // Восстановление сохраненных значений формы при повторном открытии страницы
+  window.addEventListener('load', function() {
+    var fullName = localStorage.getItem('fullName');
+    var email = localStorage.getItem('email');
+    var phone = localStorage.getItem('phone');
+    var organization = localStorage.getItem('organization');
+    var message = localStorage.getItem('message');
     
-    xhr.send(formData);
-  });
-  
-  // При клике на кнопку открываем попап и меняем URL страницы с помощью History API
-  document.getElementById('openPopup').addEventListener('click', function() {
-    document.getElementById('popup').style.display = 'block';
-    history.pushState({popupOpen: true}, '', '?popupOpen=true');
-  });
-  
-  // При закрытии попапа скрываем его и меняем URL страницы с помощью History API
-  document.addEventListener('click', function(event) {
-    if (event.target.id !== 'openPopup' && event.target.closest('#popup') === null) {
-      document.getElementById('popup').style.display = 'none';
-      history.pushState({popupOpen: false}, '', window.location.origin + window.location.pathname);
+    if (fullName) {
+      document.getElementById('fullName').value = fullName;
+    }
+    if (email) {
+      document.getElementById('email').value = email;
+    }
+    if (phone) {
+      document.getElementById('phone').value = phone;
+    }
+    if (organization) {
+      document.getElementById('organization').value = organization;
+    }
+    if (message) {
+      document.getElementById('message').value = message;
     }
   });
   
-  // При нажатии кнопки "Назад" в браузере закрываем попап
-  window.addEventListener('popstate', function(event) {
-    if (event.state && event.state.popupOpen === false) {
-      document.getElementById('popup').style.display = 'none';
-    }
+  // Сохранение значений формы при изменении полей
+  document.getElementById('fullName').addEventListener('input', function() {
+    localStorage.setItem('fullName', this.value);
   });
+  
+  document.getElementById('email').addEventListener('input', function() {
+    localStorage.setItem('email', this.value);
+  });
+  
+  document.getElementById('phone').addEventListener('input', function() {
+    localStorage.setItem('phone', this.value);
+  });
+  
+  document.getElementById('organization').addEventListener('input', function() {
+    localStorage.setItem('organization', this.value);
+  });
+  
+  document.getElementById('message').addEventListener('input', function() {
+    localStorage.setItem('message', this.value);
+  });
+  
