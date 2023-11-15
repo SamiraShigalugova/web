@@ -63,9 +63,6 @@ feedbackForm.addEventListener('input', () => {
   errorMessage.style.display = 'none';
 });
 document.getElementById("feedbackForm").addEventListener("submit", function(event){
-  // Предотвращаем отправку формы на сервер
-  event.preventDefault();
-  
   // Очищаем данные в форме
   document.getElementById("feedbackForm").reset();
 })
