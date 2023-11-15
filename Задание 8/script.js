@@ -62,11 +62,11 @@ feedbackForm.addEventListener('input', () => {
   successMessage.style.display = 'none';
   errorMessage.style.display = 'none';
 });
-document.getElementById("popup").addEventListener("submit", function(event){
+document.getElementById("feedbackForm").addEventListener("submit", function(event){
   // Предотвращаем отправку формы на сервер
   event.preventDefault();
   
   // Очищаем данные в форме
-  document.getElementById("popup").reset();
+  document.getElementById("feedbackForm").reset();
 })
   
