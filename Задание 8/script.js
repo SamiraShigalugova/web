@@ -1,125 +1,66 @@
-// Функция для открытия попапа
-function openPopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'flex';
-    
-    // Меняем URL страницы с помощью History API
-    history.pushState(null, null, '#popup');
+const openPopupButton = document.getElementById('openPopupButton');
+const popup = document.getElementById('popup');
+const feedbackForm = document.getElementById('feedbackForm');
+const successMessage = document.getElementById('successMessage');
+const errorMessage = document.getElementById('errorMessage');
+
+// Открытие попапа при клике на кнопку
+openPopupButton.addEventListener('click', () => {
+  popup.style.display = 'block';
+  history.pushState(null, '', '/feedback');
+});
+
+// Закрытие попапа при нажатии кнопки "Назад" в браузере
+window.addEventListener('popstate', () => {
+  popup.style.display = 'none';
+});
+
+// Загрузка данных из LocalStorage и заполнение формы
+window.addEventListener('load', () => {
+  const savedFormData = JSON.parse(localStorage.getItem('feedbackFormData'));
+
+  if (savedFormData) {
+    document.getElementById('fullName').value = savedFormData.fullName;
+    document.getElementById('email').value = savedFormData.email;
+    document.getElementById('phone').value = savedFormData.phone;
+    document.getElementById('organization').value = savedFormData.organization;
+    document.getElementById('message').value = savedFormData.message;
+    document.getElementById('agreement').checked = savedFormData.agreement;
   }
-  
-  // Функция для закрытия попапа
-  function closePopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'none';
-    
-    // Меняем URL страницы с помощью History API
-    history.pushState(null, null, '/');
-  }
-  
-  // Обработчик клика по кнопке открытия формы
-  document.getElementById('openPopupButton').addEventListener('click', function() {
-    openPopup();
-  });
-  
-  // Обработчик нажатия кнопки "Назад" в браузере
-  window.addEventListener('popstate', function(event) {
-    closePopup();
-  });
-  
-  // Обработчик отправки формы
-  document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var fullName = document.getElementById('fullName').value;
-    var email = document.getElementById('email').value;
-    var phone = document.getElementById('phone').value;
-    var organization = document.getElementById('organization').value;
-    var message = document.getElementById('message').value;
-    
-    // Отправка данных на сервер с помощью fetch
-    fetch('https://formcarry.com/s/JaNllP6cta', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        fullName: fullName,
-        email: email,
-        phone: phone,
-        organization: organization,
-        message: message
-      })
-    })
-    .then(function(response) {
-      if (response.ok) {
-        // Если данные успешно отправлены
-        document.getElementById('messageBox').textContent = 'Сообщение успешно отправлено';
-        document.getElementById('messageBox').className = 'message-box success';
-        
-        // Очистка данных формы
-        document.getElementById('fullName').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('organization').value = '';
-        document.getElementById('message').value = '';
+});
+
+// Отправка формы с помощью XHR
+feedbackForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(feedbackForm);
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://formcarry.com/s/JaNllP6cta', true);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        successMessage.style.display = 'block';
+        feedbackForm.reset();
+        localStorage.removeItem('feedbackFormData');
       } else {
-        // Если произошла ошибка при отправке данных
-        document.getElementById('messageBox').textContent = 'Произошла ошибка';
-        document.getElementById('messageBox').className = 'message-box error';
+        errorMessage.style.display = 'block';
       }
-    })
-    .catch(function(error) {
-      console.log(error);
-      
-      // Если произошла ошибка при отправке данных
-      document.getElementById('messageBox').textContent = 'Произошла ошибка';
-      document.getElementById('messageBox').className = 'message-box error';
-    });
-  });
-  
-  // Восстановление сохраненных значений формы при повторном открытии страницы
-  window.addEventListener('load', function() {
-    var fullName = localStorage.getItem('fullName');
-    var email = localStorage.getItem('email');
-    var phone = localStorage.getItem('phone');
-    var organization = localStorage.getItem('organization');
-    var message = localStorage.getItem('message');
-    
-    if (fullName) {
-      document.getElementById('fullName').value = fullName;
     }
-    if (email) {
-      document.getElementById('email').value = email;
-    }
-    if (phone) {
-      document.getElementById('phone').value = phone;
-    }
-    if (organization) {
-      document.getElementById('organization').value = organization;
-    }
-    if (message) {
-      document.getElementById('message').value = message;
-    }
-  });
-  
-  // Сохранение значений формы при изменении полей
-  document.getElementById('fullName').addEventListener('input', function() {
-    localStorage.setItem('fullName', this.value);
-  });
-  
-  document.getElementById('email').addEventListener('input', function() {
-    localStorage.setItem('email', this.value);
-  });
-  
-  document.getElementById('phone').addEventListener('input', function() {
-    localStorage.setItem('phone', this.value);
-  });
-  
-  document.getElementById('organization').addEventListener('input', function() {
-    localStorage.setItem('organization', this.value);
-  });
-  
-  document.getElementById('message').addEventListener('input', function() {
-    localStorage.setItem('message', this.value);
-  });
+  };
+  xhr.send(formData);
+});
+
+// Сохранение данных из формы в LocalStorage при изменении
+feedbackForm.addEventListener('change', () => {
+  const formData = new FormData(feedbackForm);
+  const data = Object.fromEntries(formData.entries());
+  localStorage.setItem('feedbackFormData', JSON.stringify(data));
+});
+
+// Очистка сообщений об успешной отправке или ошибке при изменении формы
+feedbackForm.addEventListener('input', () => {
+  successMessage.style.display = 'none';
+  errorMessage.style.display = 'none';
+});
+
   
