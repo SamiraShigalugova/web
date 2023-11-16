@@ -44,6 +44,7 @@ feedbackForm.addEventListener('submit', (e) => {
         localStorage.removeItem('feedbackFormData');
       } else {
         errorMessage.style.display = 'block';
+        alert("Сообщение успешно отправлено")
       }
     }
   };
